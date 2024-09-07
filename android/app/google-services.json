@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "524601602707",
+    "project_id": "dojo-test-fcm",
+    "storage_bucket": "dojo-test-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524601602707:android:d58922a0e53a77b1a59366",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCshH3bo6XMCzSW5YCOIvgtEpZ1O9UCpHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524601602707:android:aa92729ee480c9b1a59366",
+        "android_client_info": {
+          "package_name": "jp.writingdojo.qa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCshH3bo6XMCzSW5YCOIvgtEpZ1O9UCpHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
