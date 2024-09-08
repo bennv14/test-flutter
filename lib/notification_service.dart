@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -14,6 +16,7 @@ class NotificationService {
   late final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   Future<void> init() async {
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
     await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
@@ -28,11 +31,18 @@ class NotificationService {
     onMessageOpenedApp = FirebaseMessaging.onMessageOpenedApp;
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (response) async {
+        print("_onDidReceiveNotificationResponse");
+      },
+      onDidReceiveBackgroundNotificationResponse: (response) async {
+        print("_onDidReceiveBackgroundNotificationResponse");
+      },
+    );
 
     onMessage.listen(display);
-    onMessageOpenedApp.listen(display);
-    FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
+    onMessageOpenedApp.listen(_handleMessageOpenedApp);
   }
 
   //setup notification
@@ -83,19 +93,11 @@ class NotificationService {
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails,
       ),
+      payload: jsonEncode(message.data),
     );
   }
 
-  Future<void> onBackgroundMessage(RemoteMessage message) async {
-    final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    flutterLocalNotificationsPlugin.show(
-      id,
-      message.notification!.title,
-      message.notification!.body,
-      const NotificationDetails(
-        android: androidNotificationDetails,
-        iOS: darwinNotificationDetails,
-      ),
-    );
+  Future<void> _handleMessageOpenedApp(RemoteMessage message) async {
+    print("handleMessageOpenedApp");
   }
 }
