@@ -1,14 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:test/custom_calender.dart';
-import 'package:test/firebase_options.dart';
-import 'package:test/notification_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await NotificationService.instance.init();
   runApp(const MyApp());
 }
 
@@ -48,9 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: CustomCalendar(
-          selectedDate: DateTime(2023, 2, 18),
-        ),
+        child: Container(),
       ),
     );
   }
